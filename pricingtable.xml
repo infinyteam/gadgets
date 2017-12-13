@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs
+    title="Pricing Table"
+    directory_title="Pricing Table"
+    author="InfinyTeam"
+    author_email="infinyteamweb@gmail.com"
+    scrolling="true"
+    description="A gadget that displays pricing table.">
+    </ModulePrefs>
+    <UserPref name="tableTitle" display_name="Title" />
+    <UserPref name="tablePrice" display_name="Price" />
+    <UserPref name="tableItems" display_name="Add items" datatype="list" />
+    <Content type="html">
+        <![CDATA[
+        
+            <div id=table_content></div>
+
+            <script type="text/javascript">
+
+                // Get userprefs
+                var prefs = new gadgets.Prefs();
+
+                // Get the array of search terms entered by the user
+                var tableTitle = prefs.getString("tableTitle"),
+                    tablePrice = prefs.getString("tablePrice"),
+                    tableItems = prefs.getArray("tableItems"),
+                    html = "";
+
+                // If the user has not added any terms yet, display message.
+                if (tableItems.length == 0) {
+
+                        html += "Add table items first!";
+
+                    } else {
+
+                        html += "<div class='pricing-table'><ul>";
+                        for (var i = 0; i < tableItems.length ; i++) {
+                        var item = (tableItems[i]);
+                        html += "<li>" + item + "</li>";
+                        html += "</ul></div>";
+                    
+                    }
+                }
+
+                document.getElementById("table_content").innerHTML = html;
+
+            </script>
+        ]]>
+    </Content>
+</Module>
