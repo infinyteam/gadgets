@@ -1,62 +1,76 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Tabs Demo" height="140" scrolling="true" >
-    <Require feature="tabs" />
-  </ModulePrefs>
-  <Content type="html">
-  <![CDATA[
+	<ModulePrefs
+		title="Instagram"
+		directory_title="Instagram Carousel"
+		author="InfinyTeam"
+		height="168"
+		author_email="infinyteamweb@gmail.com"
+		scrolling="false"
+		thumbnail="http://2.bp.blogspot.com/-lKz014ESBU8/VTb5dUZcnMI/AAAAAAAADgw/n_OTrNSvvKs/s1600/instagram.png"
+		description="A gadget that displays your Instagram photos.">
+	</ModulePrefs>
+	<UserPref name="instagramid" display_name="UserID" default_value="" datatype="string"/>
+	<UserPref name="instagramtoken" display_name="Token" default_value="" datatype="string"/>
+	<UserPref name="marginvalue" display_name="Margin" default_value="20" datatype="string"/>
+	<UserPref name="enablenavigation" display_name="Navigation" default_value="Grey" datatype="enum" >
+		<EnumValue value="Grey" />
+		<EnumValue value="Dark" />
+		<EnumValue value="Disable" />
+	</UserPref>
 
-    <script type="text/javascript">
-    // Initialize tabs, designate the tab named "Two" as
-    // the tab selected by default.
-    var tabs = new gadgets.TabSet(__MODULE_ID__, "Two");
-    function init() {
-        // Technique #1: Capture the tab's ID when you create it, and use the ID
-        // to add content to the tab's corresponding <div>.
-        var one_Id = tabs.addTab('<div style="color: red; font-weight: bold; background-color:#ccf;">Cool Tab</div>');
-        document.getElementById(one_Id).innerHTML = "Content for tab One.";
+	<Content type="html"><![CDATA[
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-        // Technique #2: Create the tab and define a corresponding <div> in the
-        // HTML portion of the gadget. Add static content to the <div>.
+<style type="text/css">
+.ui-sortable-handle {
+-ms-touch-action: none;
+touch-action: none;
+}
 
-        tabs.addTab("Two", {
-           contentContainer: document.getElementById("two_id")
-        });
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
+html>body #sortable li { height: 1.5em; line-height: 1.2em; }
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
 
-        // Technique #3: Create the tab and define a corresponding <div> in the
-        // HTML portion of the gadget. Add static content to the <div>.
-        // Use a callback function to add dynamic content to the static content.
+body {
+background-color: transparent !important;
+overflow: hidden !important;
+}
 
-        tabs.addTab("Three", {
-           contentContainer: document.getElementById("three_id"),
-           callback: callback
-        });
+</style>
 
-        // Technique #4: Create the tab with a tooltip message. If specified <div>
-        // doesn't exist, tabs library creates one.
-        // Invoke callback function.
-        tabs.addTab("Four", {
-           contentContainer: document.getElementById("four_id"),
-           callback: callback,
-           tooltip: "I'm special"
-        });
-    }
+		<script type="text/javascript">
+			var prefs = new gadgets.Prefs();
 
-    // Callback that provides content to tabs Three and Four
-    function callback(tabId) {
-      var p = document.createElement("p");
-      // Get selected tab
-      var selectedTab = tabs.getSelectedTab();
-      p.innerHTML = "This is dynamic content generated in callback for tab " + selectedTab.getName();
-      document.getElementById(tabId).appendChild(p);
-    }
+			function displayinstagram () {
+				var instagramid = prefs.getString("instagramid");
+				var instagramtoken = prefs.getString("instagramtoken");
+				var marginvalue = prefs.getString("marginvalue");
+				var enablenavigation = prefs.getString("enablenavigation");
 
-    // Call init function to initialize and display tabs.
-    gadgets.util.registerOnLoadHandler(init);
-    </script>
+				document.write('<scr'+'ipt type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></sc'+'ript><scr'+'ipt type="text/javascript" src="http://cdn.heybi.com/scripts/owlcarousel.js"></sc'+'ript><scr'+'ipt type="text/javascript" src="http://cdn.heybi.com/scripts/instafeed.js"></sc'+'ript><scr'+'ipt>var userFeed = new Instafeed({ limit: "20", resolution: "low_resolution", get: "user", userId: ' + instagramid + ', accessToken: "' + instagramtoken + '", template: "<a target=\x27_blank\x27 href=\x27{{link}}\x27><img src=\x27{{image}}\x27 /></a>", after: function() { $(".owl-carousel").owlCarousel({ loop: true, margin: ' + marginvalue + ', nav: true, responsive: { 0:{ items: 2, nav: false }, 320:{ items: 2, nav: false }, 480:{ items: 2 }, 640:{ items: 3 }, 840:{ items: 4 }, 1000:{ items: 5 }, 1200:{ items: 6 } } }) } }); userFeed.run();</sc'+'ript><div id="instagram-outer" class="nav-' + enablenavigation + '"><div class="instagram-inner owl-carousel" id="instafeed"></div></div>');
+			}
+			gadgets.util.registerOnLoadHandler(displayinstagram);
 
-   <div id="two_id" style="display:none">Content for tab Two.</div>
-   <div id="three_id" style="display:none">This is static content for tab Three.</div>
-  ]]>
-  </Content>
+$( function() {
+	$( "#sortable" ).sortable({
+		placeholder: "ui-state-highlight"
+	});
+	$( "#sortable" ).disableSelection();
+} );
+		</script>
+
+<ul id="sortable">
+  <li class="ui-state-default">Item 1</li>
+  <li class="ui-state-default">Item 2</li>
+  <li class="ui-state-default">Item 3</li>
+  <li class="ui-state-default">Item 4</li>
+  <li class="ui-state-default">Item 5</li>
+  <li class="ui-state-default">Item 6</li>
+  <li class="ui-state-default">Item 7</li>
+</ul>
+
+	]]></Content>
 </Module>
