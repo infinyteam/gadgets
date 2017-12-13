@@ -5,7 +5,7 @@
     directory_title="Pricing Table"
     author="InfinyTeam"
     author_email="infinyteamweb@gmail.com"
-    scrolling="true"
+    scrolling="false"
     description="A gadget that displays pricing table.">
     </ModulePrefs>
     <UserPref name="tableTitle" display_name="Title" />
