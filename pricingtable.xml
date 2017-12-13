@@ -33,15 +33,15 @@
                         html += "Add table items first!";
 
                     } else {
-
-                        html += "<div class='pricing-table'><ul>";
+                        var title = "<h4 class='title'>" + tableTitle + "</h4>",
+                            price = "<h1 class='price'>" + tablePrice + "</h1>";
+                        html += "<div class='pricing-table'>" + title + "" + price + "<ul>";
                         for (var i = 0; i < tableItems.length ; i++) {
-                        var item = (tableItems[i]);
-                        html += "<li>" + item + "</li>";
+                            var item = (tableItems[i]);
+                            html += "<li>" + item + "</li>";
+                        }
                         html += "</ul></div>";
-                    
                     }
-                }
 
                 document.getElementById("table_content").innerHTML = html;
 
