@@ -10,14 +10,7 @@
 		thumbnail="http://2.bp.blogspot.com/-lKz014ESBU8/VTb5dUZcnMI/AAAAAAAADgw/n_OTrNSvvKs/s1600/instagram.png"
 		description="A gadget that displays your Instagram photos.">
 	</ModulePrefs>
-	<UserPref name="instagramid" display_name="UserID" default_value="" datatype="string"/>
-	<UserPref name="instagramtoken" display_name="Token" default_value="" datatype="string"/>
-	<UserPref name="marginvalue" display_name="Margin" default_value="20" datatype="string"/>
-	<UserPref name="enablenavigation" display_name="Navigation" default_value="Grey" datatype="enum" >
-		<EnumValue value="Grey" />
-		<EnumValue value="Dark" />
-		<EnumValue value="Disable" />
-	</UserPref>
+	<UserPref name="instagramid" display_name="Table" default_value="" datatype="string"/>
 
 	<Content type="html"><![CDATA[
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -25,24 +18,43 @@
 
 <style type="text/css">
 .ui-sortable-handle {
--ms-touch-action: none;
-touch-action: none;
+	-ms-touch-action: none;
+	touch-action: none;
 }
 
-#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; }
-html>body #sortable li { height: 1.5em; line-height: 1.2em; }
-.ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 32%; }
+#sortable > li {
+    background-color: #f5f5f5;
+    border: 1px solid transparent;
+    font-size:  13px;
+    color: #fc7248;
+    height: 30px !important;
+    line-height: 31px !important;
+    padding: 0 10px;
+	margin: 0 5px 5px 5px;
+    position:  relative;
+}
+
+#sortable > li.ui-state-default:after {
+    content: "+";
+    float:  right;
+    color: #aaa;
+}
+
+#sortable > li.ui-sortable-placeholder {
+    background: #fff;
+    border: 1px dashed #ddd;
+}
 
 body {
-background-color: transparent !important;
-overflow: hidden !important;
+	background-color: transparent !important;
+	overflow: hidden !important;
 }
 
 </style>
 
 		<script type="text/javascript">
-			var prefs = new gadgets.Prefs();
+			/*var prefs = new gadgets.Prefs();
 
 			function displayinstagram () {
 				var instagramid = prefs.getString("instagramid");
@@ -52,7 +64,7 @@ overflow: hidden !important;
 
 				document.write('<scr'+'ipt type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></sc'+'ript><scr'+'ipt type="text/javascript" src="http://cdn.heybi.com/scripts/owlcarousel.js"></sc'+'ript><scr'+'ipt type="text/javascript" src="http://cdn.heybi.com/scripts/instafeed.js"></sc'+'ript><scr'+'ipt>var userFeed = new Instafeed({ limit: "20", resolution: "low_resolution", get: "user", userId: ' + instagramid + ', accessToken: "' + instagramtoken + '", template: "<a target=\x27_blank\x27 href=\x27{{link}}\x27><img src=\x27{{image}}\x27 /></a>", after: function() { $(".owl-carousel").owlCarousel({ loop: true, margin: ' + marginvalue + ', nav: true, responsive: { 0:{ items: 2, nav: false }, 320:{ items: 2, nav: false }, 480:{ items: 2 }, 640:{ items: 3 }, 840:{ items: 4 }, 1000:{ items: 5 }, 1200:{ items: 6 } } }) } }); userFeed.run();</sc'+'ript><div id="instagram-outer" class="nav-' + enablenavigation + '"><div class="instagram-inner owl-carousel" id="instafeed"></div></div>');
 			}
-			gadgets.util.registerOnLoadHandler(displayinstagram);
+			gadgets.util.registerOnLoadHandler(displayinstagram);*/
 
 $( function() {
 	$( "#sortable" ).sortable({
@@ -67,9 +79,6 @@ $( function() {
   <li class="ui-state-default">Item 2</li>
   <li class="ui-state-default">Item 3</li>
   <li class="ui-state-default">Item 4</li>
-  <li class="ui-state-default">Item 5</li>
-  <li class="ui-state-default">Item 6</li>
-  <li class="ui-state-default">Item 7</li>
 </ul>
 
 	]]></Content>
