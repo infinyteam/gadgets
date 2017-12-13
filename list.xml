@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
   <ModulePrefs
-    title="List Data Type Example"
-    scrolling="true"/>
-  <UserPref name="mylist"
-    display_name="Add Terms"
-    datatype="list" />
+    title="Setprefs New">
+    <Require feature="opensocial-0.8"/>
+    <Require feature="setprefs" />
+    </ModulePrefs>
+  <UserPref
+    name="counter"
+    default_value="0"
+    datatype="hidden"/>
   <Content type="html">
   <![CDATA[
-  <div id=content_div></div>
+    <div id="content_div" style="height: 100px;"></div>
+    <script type="text/javascript">
 
-  <script type="text/javascript">
-    // Get userprefs
+    // Get user preferences
     var prefs = new gadgets.Prefs();
-
-    // Get the array of search terms entered by the user
-    var terms = prefs.getArray("mylist");
     var html = "";
-
-    // If the user has not added any terms yet, display message.
-    if (terms.length == 0)
-    {
-      html += "Edit the userprefs to add terms.";
+    var div = document.getElementById('content_div');
+    // Increment value of "counter" user preference
+    function incrementCounter() {
+      var count = prefs.getInt("counter");
+      div.innerHTML = "The count is " + count + ".";
+      // Increment "counter" userpref
+      prefs.set("counter", count + 1);
     }
-    else {
-      html += "Your terms are:<br /><br />";
-      for (var i = 0; i < terms.length ; i++) {
-        var term = (terms[i]);
-        html += term + "<br />";
-      }
-    }
-    document.getElementById("content_div").innerHTML = html;
-  </script>
 
+    // Reset value of "counter" userpref to 0
+    function resetCounter(){
+      prefs.set("counter", 0);
+      div.innerHTML = "Count reset to " + prefs.getInt("counter") + ".";
+    }
+
+    </script>
+    <input type=button value="Count" name="count" onClick="incrementCounter()">
+    <input type=button value="Reset" name="reset" onClick="resetCounter()">
   ]]>
   </Content>
 </Module>
