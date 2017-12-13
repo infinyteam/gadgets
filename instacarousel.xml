@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
 	<ModulePrefs
-		title="Instagram Gallery"
+		title="Instagram"
 		directory_title="Instagram Carousel"
 		author="InfinyTeam"
 		height="168"
@@ -11,7 +11,7 @@
 		description="A gadget that displays your Instagram photos.">
 	</ModulePrefs>
 	<UserPref name="instagramid" display_name="UserID" default_value="" datatype="string"/>
-	<UserPref name="instagramtoken" display_name="Token ID" default_value="" datatype="string"/>
+	<UserPref name="instagramtoken" display_name="Token" default_value="" datatype="string"/>
 	<UserPref name="marginvalue" display_name="Margin" default_value="20" datatype="string"/>
 	<UserPref name="enablenavigation" display_name="Navigation" default_value="Grey" datatype="enum" >
 		<EnumValue value="Grey" />
